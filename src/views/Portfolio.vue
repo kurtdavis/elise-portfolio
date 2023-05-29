@@ -32,7 +32,7 @@ const items = [
 		msg: 'A Barn',
 		img: '/src/assets/projects/barn.jpg',
 		subMsg: 'A harvest host\'s barn in the midwest',
-		date: 202,
+		date: '5/23/2021',
 		details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 	},
 	{

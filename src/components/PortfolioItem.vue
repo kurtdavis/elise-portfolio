@@ -15,7 +15,7 @@ defineProps({
 		required: true,
 	},
 	date: {
-		type: Date,
+		type: String,
 		required: false,
 		default: null
 	},
@@ -43,9 +43,9 @@ let show = ref(false)
 
 		<v-card-title>
 			{{ msg }}
-			<span v-if="date" class="float-right font-weight-light">
+			<small v-if="date" class="float-right font-weight-light">
 			circa {{ new Date(date).toLocaleDateString() }}
-			</span>
+			</small>
 		</v-card-title>
 		<v-card-subtitle v-if="subMsg">
 			{{ subMsg }}
