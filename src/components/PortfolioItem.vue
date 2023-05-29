@@ -1,5 +1,11 @@
 <script setup>
+import { ref, computed } from 'vue'
 defineProps({
+	view: {
+		type: String,
+		required: false,
+		default: 'small'
+	},
 	msg: {
 		type: String,
 		required: true,
@@ -7,6 +13,11 @@ defineProps({
 	img: {
 		type: String,
 		required: true,
+	},
+	date: {
+		type: Date,
+		required: false,
+		default: null
 	},
 	subMsg: {
 		type: String,
@@ -18,19 +29,13 @@ defineProps({
 		required: false,
 		default: null,
 	},
-	show: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
 })
+
+let show = ref(false)
 </script>
 
 <template>
-	<v-card
-			class="mx-auto"
-			max-width="344"
-	>
+	<v-card min-width="344" >
 		<v-img
 				:src="img"
 				height="200px"
@@ -38,15 +43,19 @@ defineProps({
 
 		<v-card-title>
 			{{ msg }}
+			<span v-if="date" class="float-right font-weight-light">
+			circa {{ new Date(date).toLocaleDateString() }}
+			</span>
 		</v-card-title>
 		<v-card-subtitle v-if="subMsg">
 			{{ subMsg }}
 		</v-card-subtitle>
 
-		<v-card-actions>
+		<v-card-actions v-if="view == 'small'">
 			<v-btn
 					color="orange-lighten-2"
 					variant="text"
+					@click="$emit('showDetails')"
 			>
 				Details
 			</v-btn>
