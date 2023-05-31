@@ -57,7 +57,7 @@ let show = ref(false)
 					variant="text"
 					@click="$emit('showDetails')"
 			>
-				Details
+				View
 			</v-btn>
 
 			<v-spacer></v-spacer>

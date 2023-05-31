@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import PortfolioItem from '@/components/PortfolioItem.vue'
+import ViewHeader from "../components/ViewHeader.vue";
 
 const dialogItem = ref(null)
 const showDialog = ref(false)
@@ -42,35 +43,28 @@ const items = [
 		details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 	},
 	{
+		msg: 'Me, in latin class',
+		img: '/src/assets/projects/doodle-yawn.jpg',
+		subMsg: 'Mechanical Pencil on Book',
+		details: 'I don\'t always pay attention to latin lectures, but when I do, I create doodles.'
+	},
+	{
 		msg: 'Cartoon Card',
 		img: '/src/assets/projects/cartoon-drawings.jpg',
-		subMsg: 'Ink on paper',
-		details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+		subMsg: 'Ink on Paper',
+		details: 'Ink on Paper, in Rectangles, through a CCD, on your Screen of choice'
 	}
 ]
 </script>
 
 <template>
   <div class="portfolio">
-		<v-parallax
-				scale=.5
-				src="/src/assets/projects/macaroons.jpg"
-		>
-			<div class="d-flex flex-column fill-height justify-center align-center text-white">
-				<h1 class="text-h4 font-weight-thin mb-4">
-					Elise Davis
-				</h1>
-				<h4 class="subheading">
-					Portfolio of baking and art projects.  Mostly recent.
-				</h4>
-				<p class='mt-12 w-50 text-subtitle-2' >
-					Macarons are one of my favorite things to bake.
+		<ViewHeader title="Portfolio of baking and art projects.  Mostly recent."
+								bgSrc="/src/assets/projects/macaroons.jpg"
+								description="Macarons are one of my favorite things to bake.
 					They are a bit tricky, but I have a good recipe
-					and I've gotten pretty good at them.
-				</p>
-			</div>
-		</v-parallax>
-		<v-sheet class="d-flex flex-wrap bg-s bg-surface-variant">
+					and I've gotten pretty good at them." />
+		<v-sheet class="d-flex flex-wrap bg-surface-variant">
 			<PortfolioItem
 					class="flex-1-1 ma-2 pa-2"
 					@showDetails="openDetailDialog(i)"
@@ -86,25 +80,33 @@ const items = [
 			v-model="showDialog"
 			close-on-back
 	>
-		<v-card :image="dialogItem.img"
-						:title="dialogItem.msg"
-						:subtitle="dialogItem.subMsg"
-						:hover="dialogItem.detail"
-						class="text-blue-darken-4 text-shades-black"
-		density="compact"
-		height="600">
-			<v-spacer/>
-			<v-card-actions>
+		<v-hover
+				v-slot="{ isHovering, props }"
+				open-delay="200"
+		>
+			<v-card :image="dialogItem.img"
+							:title="dialogItem.msg"
+							:subtitle="dialogItem.subMsg"
+							class="text-blue-darken-4 text-shades-black"
+							density="compact"
+							v-bind="props"
+							height="600">
 				<v-spacer/>
-				<v-btn
-						color="primary"
-						variant="text"
-						@click="showDialog = false"
-				>
-					Close
-				</v-btn>
-			</v-card-actions>
-		</v-card>
+				<v-card-actions>
+					<div class="ed-portfolio-bg-fade text-blue-grey-darken-4 rounded px-2"
+							v-if="isHovering"
+					>{{ dialogItem.details }}</div>
+					<v-spacer/>
+					<v-btn
+							color="primary"
+							variant="text"
+							@click="showDialog = false"
+					>
+						Close
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-hover>
 	</v-dialog>
 </template>
 
@@ -121,5 +123,8 @@ const items = [
 }
 .portfolio .v-parallax--active > img {
 	filter: brightness(50%);
+}
+.ed-portfolio-bg-fade {
+	background-color: #ccc9;
 }
 </style>
