@@ -19,6 +19,8 @@ defineProps({
 	<v-parallax
 			scale=.5
 			:src="bgSrc"
+			class="mx-auto align-center w-75 mb-4 fade-transition-move"
+			style="max-width: 800px"
 	>
 		<div class="d-flex flex-column fill-height justify-center align-center text-white">
 			<h1 class="text-h4 font-weight-thin mb-4">
@@ -34,6 +36,8 @@ defineProps({
 	</v-parallax>
 </template>
 
-<style scoped>
-
+<style>
+.v-responsive__content {
+	z-index: 10;
+}
 </style>

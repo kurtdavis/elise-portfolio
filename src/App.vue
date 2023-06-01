@@ -4,21 +4,16 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-<!--    <img alt="Vue logo" class="logo" src="@/assets/projects/cookies-2022.jpg" width="125" height="125" />-->
-
-    <div class="wrapper">
-<!--      <HelloWorld msg="You did it!" />-->
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-				<RouterLink to="/portfolio">Portfolio</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+	<v-layout ref="app" >
+		<v-app-bar elevation="5"  name="app-bar" class="justify-center">
+			<v-app-bar-title class="d-flex justify-start w-25 ">Elise Davis</v-app-bar-title>
+			<RouterLink class="v-btn mx-2 pa-2" to="/">About</RouterLink>
+			<RouterLink class="v-btn mx-2 pa-2" to="/portfolio">Portfolio</RouterLink>
+		</v-app-bar>
+		<v-main style="min-height: 300px;">
+			<RouterView />
+		</v-main>
+	</v-layout>
 </template>
 
 <style scoped>
@@ -27,7 +22,6 @@ import HelloWorld from './components/HelloWorld.vue'
   display: block;
   margin: 0 auto 2rem;
 }
-
 nav {
   width: 100%;
   font-size: 12px;

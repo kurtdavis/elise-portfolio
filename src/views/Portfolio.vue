@@ -118,9 +118,6 @@ const items = [
     align-items: center;
   }
 }
-.v-responsive__content {
-	z-index: 10;
-}
 .portfolio .v-parallax--active > img {
 	filter: brightness(50%);
 }
