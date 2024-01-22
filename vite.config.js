@@ -7,9 +7,21 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   // root: fileURLToPath(new URL('./src', import.meta.url)),
+  base: 'https://kurtdavis.github.io/elise-portfolio/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src/', import.meta.url)),
     }
-  }
+  },
+    // server: {
+    //     proxy: {
+    //         '/api': {
+    //             target: 'http://localhost:3000',
+    //             changeOrigin: true,
+    //             rewrite: (path) => path.replace(/^\/api/, '')
+    //
+    //         }
+    //     }
+    // },
+  publicDir: fileURLToPath(new URL('./public', import.meta.url)),
 })
