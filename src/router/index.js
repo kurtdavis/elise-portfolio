@@ -26,6 +26,12 @@ const router = createRouter({
       name: 'resume',
       // Lazy load w/import here
       component: () => import('../views/Resume.vue')
+    },
+    //   default route
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: AboutView
     }
   ]
 })
