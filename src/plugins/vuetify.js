@@ -14,7 +14,6 @@ const eliseDarkTheme = {
         'surface-bright': '#4D4D4D',
         'surface-light': '#5A5A5A',
         'surface-variant': '#000000',
-        'surface-variant': '189,189,189',
         'on-surface-variant': '#383636',
         primary: '#1867C0',
         'primary-darken-1': '#1F5592',
