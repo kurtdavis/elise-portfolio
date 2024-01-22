@@ -4,7 +4,7 @@ defineProps({
 	view: {
 		type: String,
 		required: false,
-		default: 'small'
+		default: 'medium'
 	},
 	msg: {
 		type: String,
@@ -24,6 +24,11 @@ defineProps({
 		required: false,
 		default: null,
 	},
+  tags: {
+    type: Array,
+    required: false,
+    default: null,
+  },
 	details: {
 		type: String,
 		required: false,
@@ -35,8 +40,11 @@ let show = ref(false)
 </script>
 
 <template>
-	<v-card min-width="344" >
+<!--  -width="344" -->
+	<v-card   >
 		<v-img
+        @click="$emit('showDetails')"
+        class="v-icon--clickable"
 				:src="img"
 				height="200px"
 				cover ></v-img>
@@ -44,28 +52,33 @@ let show = ref(false)
 		<v-card-title>
 			{{ msg }}
 			<small v-if="date" class="float-right font-weight-light">
-			circa {{ new Date(date).toLocaleDateString() }}
+<!--			{{ new Date(date).toLocaleDateString() }}-->
+        {{date}}
 			</small>
 		</v-card-title>
 		<v-card-subtitle v-if="subMsg">
 			{{ subMsg }}
 		</v-card-subtitle>
+<!--    <v-card-subtitle v-if="tags">-->
+<!--      <v-chip v-for="tag in tags"-->
+<!--              :key="tag"-->
+<!--              size="small"-->
+<!--              variant="plain"-->
+<!--              color="secondary"-->
+<!--              @click="$emit('tagClick', tag)"-->
+<!--              class="mr-2" v-html="tag"/>-->
+<!--    </v-card-subtitle>-->
 
-		<v-card-actions v-if="view == 'small'">
-			<v-btn
-					color="orange-lighten-2"
-					variant="text"
-					@click="$emit('showDetails')"
-			>
-				View
+    <v-card-actions v-if="view == 'small'">
+      <v-btn @click="$emit('showDetails')" block="" variant="outlined">
+        View
 			</v-btn>
+<!--			<v-spacer></v-spacer>-->
 
-			<v-spacer></v-spacer>
-
-			<v-btn
-					:icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-					@click="show = !show"
-			></v-btn>
+<!--			<v-btn-->
+<!--					:icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"-->
+<!--					@click="show = !show"-->
+<!--			></v-btn>-->
 		</v-card-actions>
 
 		<v-expand-transition>

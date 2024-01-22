@@ -1,76 +1,42 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
 	<v-layout ref="app" >
-		<v-app-bar elevation="5"  name="app-bar" class="justify-center">
-			<v-app-bar-title class="d-flex justify-start w-25 ">Elise Davis</v-app-bar-title>
-			<RouterLink class="v-btn mx-2 pa-2" to="/">About</RouterLink>
-			<RouterLink class="v-btn mx-2 pa-2" to="/portfolio">Portfolio</RouterLink>
-		</v-app-bar>
-		<v-main style="min-height: 300px;">
+		<v-app-bar elevation="5"  name="app-bar" class="d-flex" >
+			<v-app-bar-title class="w-25">Elise Davis</v-app-bar-title>
+      <template v-slot:append>
+        <RouterLink class="v-btn mx-2 pa-2" to="/">About</RouterLink>
+        <RouterLink class="v-btn mx-2 pa-2" to="/portfolio">Portfolio</RouterLink>
+        <RouterLink class="v-btn mx-2 pa-2" to="/resume">Resume</RouterLink>
+        <v-switch
+            v-model="darkmode"
+            hide-details
+            inset
+            color="primary"
+        ></v-switch>
+        </template>
+    </v-app-bar>
+		<v-main style="min-height: 300px;" class="xd-flex align-centerx xjustify-center">
 			<RouterView />
 		</v-main>
 	</v-layout>
 </template>
 
-<style scoped>
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import {ref, watch} from 'vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 1rem;
-}
+import { useTheme } from 'vuetify'
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+const theme = useTheme()
+const darkmode = ref(true)
+theme.global.name.value =  'dark'
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
+watch(darkmode, (newVal, oldVal) => {
+  // theme.global.current.value.dark = newVal
+  console.log('darkmode', newVal)
+  theme.global.name.value = newVal ? 'dark' : 'light'
+})
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
+</script>
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
+<style scoped >
 </style>

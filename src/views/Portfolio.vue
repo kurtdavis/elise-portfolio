@@ -1,81 +1,105 @@
-<script setup lang="ts">
+<script setup lang="ts" xmlns:h3="http://www.w3.org/1999/html">
 import { ref, computed } from 'vue'
 import PortfolioItem from '@/components/PortfolioItem.vue'
-import ViewHeader from "../components/ViewHeader.vue";
+import {items, cardItems, projItems} from '../data/portfolio.js'
 
 const dialogItem = ref(null)
 const showDialog = ref(false)
+const tagFilter = ref([])
 // functions that mutate state and trigger updates
 function openDetailDialog(item) {
 	dialogItem.value = item
 	showDialog.value = true
 }
-const items = [
-	// {
-	// 	msg: 'Top western road trips',
-	// 	img: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg',
-	// 	subMsg: 'The best road trips in the west',
-	// 	details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-	// },
-	// {
-	// 	msg: 'Top eastern road trips',
-	// 	img: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
-	// 	subMsg: 'The best road trips in the east',
-	// 	details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-	// },
-	// {
-	// 	msg: 'Top southern road trips',
-	// 	img: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-	// 	subMsg: 'The best road trips in the south',
-	// 	details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-	// },
-	{
-		msg: 'A Barn',
-		img: '/src/assets/projects/barn.jpg',
-		subMsg: 'A harvest host\'s barn in the midwest',
-		date: '5/23/2021',
-		details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-	},
-	{
-		msg: 'Flower Card',
-		img: '/src/assets/projects/card-flowers.jpg',
-		subMsg: 'Watercolor',
-		details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-	},
-	{
-		msg: 'Me, in latin class',
-		img: '/src/assets/projects/doodle-yawn.jpg',
-		subMsg: 'Mechanical Pencil on Book',
-		details: 'I don\'t always pay attention to latin lectures, but when I do, I create doodles.'
-	},
-	{
-		msg: 'Cartoon Card',
-		img: '/src/assets/projects/cartoon-drawings.jpg',
-		subMsg: 'Ink on Paper',
-		details: 'Ink on Paper, in Rectangles, through a CCD, on your Screen of choice'
-	}
-]
+function filterByTag(tag) {
+  console.log('filterByTag', tag)
+  if (tagFilter.value.includes(tag)) {
+    tagFilter.value = tagFilter.value.filter(t => t !== tag)
+  } else {
+    tagFilter.value.push(tag)
+  }
+}
+
+// computed properties
+const filteredItems = computed(() => {
+  let myItems = [...items, ...projItems, ...cardItems]
+  return myItems
+  // return filteredItems.filter(i => {
+  //   return tagFilter.value.length === 0 || (i.tags && i.tags.some(t => tagFilter.value.includes(t)))
+  // })
+})
+const availableTags = computed(() => {
+  let allItems = projItems.concat(cardItems).concat(items)
+  let tags = []
+  // allItems.forEach(i => {
+  //   if (i.tags) {
+  //     i.tags.forEach(t => {
+  //       if (!tags.includes(t)) {
+  //         tags.push(t)
+  //       }
+  //     })
+  //   }
+  // })
+  return tags
+})
 </script>
 
 <template>
-  <div class="portfolio">
-		<ViewHeader title="Portfolio of baking and art projects.  Mostly recent."
-								bgSrc="/src/assets/projects/macaroons.jpg"
-								description="Macarons are one of my favorite things to bake.
-					They are a bit tricky, but I have a good recipe
-					and I've gotten pretty good at them." />
-		<v-sheet class="d-flex flex-wrap bg-surface-variant">
-			<PortfolioItem
-					class="flex-1-1 ma-2 pa-2"
-					@showDetails="openDetailDialog(i)"
-					v-for="i in items"
-					:msg="i.msg"
-					:date="i.date"
-					:img="i.img"
-					:details="i.details"
-					:subMsg="i.subMsg"/>
-		</v-sheet>
-  </div>
+<!--  <v-sheet class="d-flex flex-row flex-wrap justify-center xxbg-surface-variant">-->
+<!--  <v-btn class="mx-2" v-for="tag in availableTags" @click="filterByTag(tag)"-->
+<!--         :color="tagFilter.includes(tag) ? 'primary' : 'secondary'">{{ tag }}-->
+<!--  </v-btn>-->
+<!--  </v-sheet>-->
+  <h3 class="ma-2 pa-2">Various Art Projects & Doodles</h3>
+  <v-sheet class="d-flex flex-row flex-wrap justify-center bg-shades-transparent mb-8 pa-2">
+    <PortfolioItem
+        class="flex-1-1 ma-2 pa-0"
+        @showDetails="openDetailDialog(i)"
+        @tagClick="filterByTag"
+        v-for="i in items"
+        :msg="i.msg"
+        :date="i.date"
+        :img="i.img"
+        :tags="i.tags"
+        :details="i.details"
+        :subMsg="i.subMsg"/>
+  </v-sheet>
+  <h3 class="ma-2 pa-2">Cards</h3>
+  <v-sheet class="d-flex flex-row flex-wrap justify-center bg-shades-transparent mb-8 pa-2">
+        <PortfolioItem
+            class="flex-1-1 ma-2 pa-0"
+            @showDetails="openDetailDialog(i)"
+            @tagClick="filterByTag"
+            v-for="i in cardItems"
+            :msg="i.msg"
+            :date="i.date"
+            :img="i.img"
+            :tags="i.tags"
+            :details="i.details"
+            :subMsg="i.subMsg"/>
+  </v-sheet>
+  <h3 class="ma-2 pa-2">Hamlet Project</h3>
+  <v-sheet class="d-flex flex-row flex-wrap justify-center bg-shades-transparent mb-8 pa-2">
+    <PortfolioItem
+        class="ma-2 pa-0"
+        @showDetails="openDetailDialog(i)"
+        @tagClick="filterByTag"
+        v-for="i in projItems"
+        :msg="i.msg"
+        :date="i.date"
+        :img="i.img"
+        :tags="i.tags"
+        :details="i.details"
+        :subMsg="i.subMsg"/>
+  </v-sheet>
+<!--    <Parallax-->
+<!--        title="Portfolio"-->
+<!--        heading="Portfolio of baking and art projects.  Mostly recent."-->
+<!--        bgSrc="/src/assets/projects/macaroons.jpg"-->
+<!--        description="Macarons are one of my favorite things to bake.-->
+<!--					They are a bit tricky, but I have a good recipe-->
+<!--					and I've gotten pretty good at them." >-->
+<!--    </Parallax>-->
 	<v-dialog
 			v-model="showDialog"
 			close-on-back
@@ -84,14 +108,17 @@ const items = [
 				v-slot="{ isHovering, props }"
 				open-delay="200"
 		>
-			<v-card :image="dialogItem.img"
+			<v-card
 							:title="dialogItem.msg"
 							:subtitle="dialogItem.subMsg"
-							class="text-blue-darken-4 text-shades-black"
+							class=""
 							density="compact"
 							v-bind="props"
 							height="600">
-				<v-spacer/>
+        <v-img
+            :src="dialogItem.img"
+            height="200px"
+            contain ></v-img>
 				<v-card-actions>
 					<div class="ed-portfolio-bg-fade text-blue-grey-darken-4 rounded px-2"
 							v-if="isHovering"
@@ -114,12 +141,9 @@ const items = [
 @media (min-width: 1024px) {
   .portfolio {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
+    //display: flex;
+    //align-items: center;
   }
-}
-.portfolio .v-parallax--active > img {
-	filter: brightness(50%);
 }
 .ed-portfolio-bg-fade {
 	background-color: #ccc9;

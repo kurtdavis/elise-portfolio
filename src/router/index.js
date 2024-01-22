@@ -15,6 +15,18 @@ const router = createRouter({
       name: 'portfolio',
       // Lazy load w/import here
       component: () => import('../views/Portfolio.vue')
+    },
+    {
+      path: '/bakery',
+      name: 'bakery',
+      // Lazy load w/import here
+      component: () => import('../views/Bakery.vue')
+    },
+    {
+      path: '/resume',
+      name: 'resume',
+      // Lazy load w/import here
+      component: () => import('../views/Resume.vue')
     }
   ]
 })
