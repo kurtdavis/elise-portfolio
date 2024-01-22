@@ -36,9 +36,9 @@ defineProps({
       </h3>
       <h4  class='mt-12 w-50 text-subtitle-1 text-shades-white' >
         I am a full stack baker and artist in my spare time. Check out my
-        <a href="" @click="router.push({name: 'portfolio'})">portfolio</a>
+        <a href="" @click="(e) => {e.preventDefault(); router.push({name: 'portfolio'})}">portfolio</a>
         and
-        <a href="" @click="router.push({name: 'resume'})">resume</a>
+        <a href="" @click="(e) => {e.preventDefault(); router.push({name: 'resume'})}">resume</a>
         .
       </h4>
       <p class='mt-12 w-50 text-subtitle-2'>
