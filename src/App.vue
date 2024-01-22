@@ -3,9 +3,9 @@
 		<v-app-bar elevation="5"  name="app-bar" class="d-flex" >
 			<v-app-bar-title class="w-25">Elise Davis</v-app-bar-title>
       <template v-slot:append>
-        <RouterLink class="v-btn mx-2 pa-2" to="./">About</RouterLink>
-        <RouterLink class="v-btn mx-2 pa-2" to="./portfolio">Portfolio</RouterLink>
-        <RouterLink class="v-btn mx-2 pa-2" to="./resume">Resume</RouterLink>
+        <RouterLink class="v-btn mx-2 pa-2" :to="{name: 'about'}">About</RouterLink>
+        <RouterLink class="v-btn mx-2 pa-2" :to="{name: 'portfolio'}">Portfolio</RouterLink>
+        <RouterLink class="v-btn mx-2 pa-2" :to="{path: '/resume'}">Resume</RouterLink>
         <v-switch
             v-model="darkmode"
             hide-details

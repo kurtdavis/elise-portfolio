@@ -9,30 +9,22 @@ const router = createRouter({
       name: 'about',
       component: AboutView
     },
+    // Lazy load w/imports here
     {
       path: '/portfolio',
       name: 'portfolio',
-      // Lazy load w/import here
       component: () => import('../views/Portfolio.vue')
     },
     {
       path: '/bakery',
       name: 'bakery',
-      // Lazy load w/import here
       component: () => import('../views/Bakery.vue')
     },
     {
       path: '/resume',
       name: 'resume',
-      // Lazy load w/import here
       component: () => import('../views/Resume.vue')
     },
-    //   default route
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'not-found',
-      component: AboutView
-    }
   ]
 })
 
