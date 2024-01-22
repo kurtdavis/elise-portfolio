@@ -4,7 +4,7 @@ import ViewHeader from "@/components/ViewHeader.vue";
 
 <template>
   <ViewHeader v-if="$route.path == '/'"
-              bgSrc="/src/assets/elise-baking.jpg" >
+              bgSrc="public/imgs/elise-baking.jpg" >
   </ViewHeader>
 
 </template>
