@@ -38,6 +38,6 @@ import router from "@/router";
   }
 }
 .masthead {
-  height: 120vh;
+  height: 130vh;
 }
 </style>
