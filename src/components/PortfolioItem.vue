@@ -14,6 +14,10 @@ defineProps({
 		type: String,
 		required: true,
 	},
+  thumb: {
+    type: String,
+    required: false,
+  },
 	date: {
 		type: String,
 		required: false,
@@ -45,7 +49,7 @@ let show = ref(false)
 		<v-img
         @click="$emit('showDetails')"
         class="v-icon--clickable"
-				:src="img"
+				:src="thumb || img"
 				height="200px"
 				cover ></v-img>
 

@@ -19,32 +19,10 @@ defineProps({
 
 <template>
   <v-parallax
-			scale=.5
-			:src="bgSrc"
-			class=" mb-4 fade-transition-move"
-	>
-<!--   mx-auto align-center w-75
-			style="max-width: 800px"
- -->
-    <section class="masthead" role="img" aria-label="Image Description" >
-<!--     :style="'background-image: url('+bgSrc+')'" -->
-      <h1>
-        Elise Davis
-      </h1>
-      <h3>
-        {{ title }}
-      </h3>
-      <h4  class='mt-12 w-50 text-subtitle-1 text-shades-white' >
-        I am a full stack baker and artist in my spare time. Check out my
-        <a href="" @click="(e) => {e.preventDefault(); router.push({name: 'portfolio'})}">portfolio</a>
-        and
-        <a href="" @click="(e) => {e.preventDefault(); router.push({name: 'resume'})}">resume</a>
-        .
-      </h4>
-      <p class='mt-12 w-50 text-subtitle-2'>
-        <a href="https://www.instagram.com/elise.davis.arts/">instagram</a>
-      </p>
-    </section>
+			scale=.3
+      :src="bgSrc"
+      class=" mb-4 fade-transition-move">
+
     <slot name="default"/>
 
 	</v-parallax>

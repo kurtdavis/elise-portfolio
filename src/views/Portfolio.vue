@@ -60,6 +60,7 @@ const availableTags = computed(() => {
         :msg="i.msg"
         :date="i.date"
         :img="i.img"
+        :thumb="i.thumb"
         :tags="i.tags"
         :details="i.details"
         :subMsg="i.subMsg"/>
@@ -74,6 +75,7 @@ const availableTags = computed(() => {
             :msg="i.msg"
             :date="i.date"
             :img="i.img"
+            :thumb="i.thumb"
             :tags="i.tags"
             :details="i.details"
             :subMsg="i.subMsg"/>
@@ -88,6 +90,7 @@ const availableTags = computed(() => {
         :msg="i.msg"
         :date="i.date"
         :img="i.img"
+        :thumb="i.thumb"
         :tags="i.tags"
         :details="i.details"
         :subMsg="i.subMsg"/>
@@ -101,13 +104,12 @@ const availableTags = computed(() => {
 <!--					and I've gotten pretty good at them." >-->
 <!--    </Parallax>-->
 	<v-dialog
-			v-model="showDialog"
-			close-on-back
-	>
+      v-model="showDialog"
+      fullscreen=""
+      close-on-back>
 		<v-hover
-				v-slot="{ isHovering, props }"
-				open-delay="200"
-		>
+        v-slot="{ isHovering, props }"
+        open-delay="200">
 			<v-card
 							:title="dialogItem.msg"
 							:subtitle="dialogItem.subMsg"
@@ -117,7 +119,7 @@ const availableTags = computed(() => {
 							height="600">
         <v-img
             :src="dialogItem.img"
-            height="200px"
+            height="460px"
             contain ></v-img>
 				<v-card-actions>
 					<div class="ed-portfolio-bg-fade text-blue-grey-darken-4 rounded px-2"
